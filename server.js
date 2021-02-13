@@ -2,11 +2,13 @@ require('dotenv').config();
 const express = require('express');
 const layouts = require('express-ejs-layouts');
 const app = express();
+const multer = require('multer'); //used for uploading files
+const cloudinary = require('cloudinary');
 
 app.set('view engine', 'ejs');
 
 app.use(require('morgan')('dev'));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false })); //to access req.body
 app.use(express.static(__dirname + '/public'));
 app.use(layouts);
 
