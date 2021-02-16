@@ -7,6 +7,11 @@ const cloudinary = require('cloudinary');
 //uploader for images, make a uploads forlder, then pass through the route as middleware
 const uploads = multer({ dest: './uploads'});
 
+
+app.get('/', (req, res)=> {
+  res.send('Hi there')
+})
+
 app.set('view engine', 'ejs');
 
 app.use(require('morgan')('dev'));
@@ -14,6 +19,7 @@ app.use(express.urlencoded({ extended: false })); //to access req.body
 app.use(express.static(__dirname + '/public'));
 app.use(layouts);
 
+//home route
 app.get('/', (req, res) => {
   res.render('index');
 });
