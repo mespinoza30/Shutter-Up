@@ -6,6 +6,7 @@ const passport = require('./config/ppConfig');
 const flash = require('connect-flash');
 const app = express();
 const multer = require('multer'); //sed for uploading files
+const db = require('./models')
 const cloudinary = require('cloudinary');
 //uploader for images, make a uploads forlder, then pass through the route as middleware
 const uploads = multer({ dest: './uploads'});
@@ -65,16 +66,30 @@ app.get('/images/new', (req, res) => {
   res.render('new');
 })
 
-app.post('/', uploads.single('inputFile'), (req, res) => {
-  //grab the uploaded file
-  const image = req.file.path;
-  console.log(image);
-  //upload image to cloudinary
-  cloudinary.uploader.upload(image, (result) => {
-    //the result that comes back from cloudinary
-    console.log(result);
-    //its getting this info from the info that it returns in the terminal
-    res.render('index', { image: result.url })
+//////get route
+app.get('/mainDial', isLoggedIn, (req, res) => {
+  db.image.findAll()
+  .then(postArray =>{
+    console.log(postArray)
+    res.render('mainDial', {posts: postArray});
+  })
+});
+///POST ROUTE
+app.post('/mainDial', uploads.single('inputFile'), (req, res) =>{//pass in the uploads folder//allows us to bring in a single file
+//greab uploaded file
+const image = req.file.path
+console.log(image)//should show in terminal upload
+//upload to image to cloudinary
+cloudinary.uploader.upload(image, (result) =>{//first parameter is the file// next one is what happens after file uploaded//we are getting back a result
+    console.log(result)//result comeback from cloudinary//should get an object back in terminal//I get the url inside the object
+    db.image.create({
+     name: req.body.name,
+     imageUrl: result.url
+  })
+  .then(newPost =>{
+    console.log(newPost.get())
+    res.redirect('mainDial')
+    })
   })
 })
 
