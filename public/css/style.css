@@ -7,3 +7,9 @@ nav ul li {
 h1 {
   color: rgb(106, 80, 148);
 }
+.page {
+  text-align: center
+}
+#divider {
+    border-top: 3px solid #bbb;
+}
