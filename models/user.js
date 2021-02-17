@@ -1,4 +1,5 @@
 'use strict';
+const bcrypt = require('bcrypt');
 const {
   Model
 } = require('sequelize');
@@ -11,15 +12,62 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.user.hasMany(models.image)
     }
   };
   user.init({
-    name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      validate: {
+       len: {
+        args: [1,50],
+        msg: 'Name must be between 1 and 50 characters'
+       }
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        isEmail: { // does a boolean check
+          msg: 'Invalid email'
+        }
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      validate: {
+        len: {
+          args: [8,20],
+          msg: 'Password must be between 8 and 20 characters'
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'user',
   });
-  return user;
+
+  // Before a user is created, we are encrypting the password and using hash in its place
+  user.addHook('beforeCreate', (pendingUser) => { // pendingUser is object that gets passed to DB
+    // Bcrypt is going to hash the password
+    let hash = bcrypt.hashSync(pendingUser.password, 12); //
+    pendingUser.password = hash; // this will go to the DB
+  });
+
+  // checking the password on Sign-In and comparing to the hashed password in the DB
+  user.prototype.validPassword = function(typedPassword) {
+    let isCorrectPassword = bcrypt.compareSync(typedPassword, this.password); // check to see if password is correct.
+    
+    return isCorrectPassword;
+  }
+
+  // return an object from the database of the user without the encrypted password
+  user.prototype.toJSON = function() {
+    let userData = this.get(); // 
+    delete userData.password; // it doesn't delete password from database, only removes it. 
+    
+    return userData;
+  }
+
+  return user; // above here
 };
