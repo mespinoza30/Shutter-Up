@@ -10,6 +10,9 @@ const db = require('./models')
 const cloudinary = require('cloudinary');
 //uploader for images, make a uploads forlder, then pass through the route as middleware
 const uploads = multer({ dest: './uploads'});
+//for put & delete 
+const methodOverride = require('method-override')
+
 
 app.set('view engine', 'ejs');
 

@@ -6,10 +6,32 @@ nav ul li {
 
 h1 {
   color: rgb(106, 80, 148);
+  font-family: 'Chelsea Market', cursive;
+  text-shadow: 3px 3px 5px gray;
 }
+
 .page {
   text-align: center
 }
+
 #divider {
-    border-top: 3px solid #bbb;
+    border-top: 3px solid rgb(0, 0, 0);
+}
+
+#shoot {
+  color: rgb(106, 80, 148);
+  font-family: 'Chelsea Market', cursive;
+  text-shadow: 3px 3px 5px gray;
+}
+
+#tagLine {
+  color: rgb(106, 80, 148);
+  font-family: 'Chelsea Market', cursive;
+  text-shadow: 3px 3px 5px gray;
+}
+
+.profile {
+  color: rgb(106, 80, 148);
+  font-family: 'Chelsea Market', cursive;
+  text-shadow: 3px 3px 5px gray;
 }
