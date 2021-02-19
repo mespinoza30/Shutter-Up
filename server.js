@@ -13,7 +13,10 @@ const uploads = multer({ dest: './uploads'});
 //for put & delete 
 const methodOverride = require('method-override')
 
-
+//404 page
+app.use(function(req, res, next){
+  res.status(404).render('404');
+});
 
 app.set('view engine', 'ejs');
 
@@ -34,9 +37,11 @@ const sessionObject = {
   saveUninitialized: true
 }
 app.use(session(sessionObject));
+
 // Passport
 app.use(passport.initialize()); // Initialize passport
 app.use(passport.session()); // Add a session
+
 // Flash 
 app.use(flash());
 app.use((req, res, next) => {
