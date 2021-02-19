@@ -100,30 +100,6 @@ cloudinary.uploader.upload(image, (result) =>{//first parameter is the file// ne
   })
 })
 
-// //delete route
-// app.delete('/profile/:index', (req, res) => {
-//   db.image.destroy({ where: {id:req.params.index} 
-//   }).then(function() {
-//     res.redirect('profile')
-//   }) 
-// })
-
-//not sure which one?
-app.delete('/profile/:index', async(req, res) => {
-  try {
-    await db.image.destroy({
-      where: {
-        id: req.params.index
-      }
-    })
-    res.redirect('/profile');
-  } catch(e) {
-    console.log(e.message)
-  }
-})
-
-
-
 //Listen on PORT
 const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () => {
