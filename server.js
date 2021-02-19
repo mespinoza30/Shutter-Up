@@ -99,6 +99,12 @@ cloudinary.uploader.upload(image, (result) =>{//first parameter is the file// ne
   })
 })
 
+app.delete('/profile/:index', (req, res) => {
+  db.image.destroy({ where: {id:req.params.index} 
+  }).then(function() {
+    res.redirect('profile')
+  }) 
+})
 
 //Listen on PORT
 const PORT = process.env.PORT || 3000;
