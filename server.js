@@ -13,11 +13,6 @@ const uploads = multer({ dest: './uploads'});
 //for put & delete 
 const methodOverride = require('method-override')
 
-//404 page
-app.use(function(req, res, next){
-  res.status(404).render('404');
-});
-
 app.set('view engine', 'ejs');
 
 const SECRET_SESSION = process.env.SECRET_SESSION;
@@ -104,6 +99,11 @@ cloudinary.uploader.upload(image, (result) =>{//first parameter is the file// ne
     })
   })
 })
+
+//404 page
+app.use(function(req, res, next){
+  res.status(404).render('404');
+});
 
 //Listen on PORT
 const PORT = process.env.PORT || 3000;
