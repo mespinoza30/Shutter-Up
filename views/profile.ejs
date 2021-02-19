@@ -1,6 +1,8 @@
 <div id="divider"></div>
 <br>
-<h3 class="profile">Please upload an image</h3>
+<h2 class="profile">Welcome <%= name%> 📸</h2>
+<br>
+<h4 class="profile">Please upload an image</h4>
 <br>
 <br>
 <br>
@@ -9,3 +11,11 @@
     <input type="file" name="inputFile">
     <button type="submit" class="btn btn-primary">Upload Image</button>
 </form>
+<br>
+<br>
+<h4 class="profile">Your camera reel</h4>
+
+<% for(let i = 0; i < allImages.length; i++) { %> 
+    <% let postItem = allImages[i].get() %> 
+    <img src="<%= postItem.imageUrl %>" alt="User uploaded image" id="imagePosted"> 
+<% } %> 

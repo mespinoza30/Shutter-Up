@@ -35,3 +35,7 @@ h1 {
   font-family: 'Chelsea Market', cursive;
   text-shadow: 3px 3px 5px gray;
 }
+
+#imagePosted {
+  width: 180px;
+}

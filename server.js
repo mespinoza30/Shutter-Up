@@ -14,6 +14,7 @@ const uploads = multer({ dest: './uploads'});
 const methodOverride = require('method-override')
 
 
+
 app.set('view engine', 'ejs');
 
 const SECRET_SESSION = process.env.SECRET_SESSION;
@@ -24,6 +25,7 @@ app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false })); //to access req.body
 app.use(express.static(__dirname + '/public'));
 app.use(layouts);
+app.use(methodOverride('_method'));
 
 const sessionObject = {
   secret: SECRET_SESSION,
@@ -50,51 +52,53 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.get('/profile', (req, res) => {
-  res.render('profile');
-});
-
 app.use('/auth', require('./routes/auth'));
 
-app.get('/profile', isLoggedIn, (req, res) => {
+app.get('/profile', (req, res) => {
   const { id, name, email } = req.user.get(); 
-  res.render('profile', { id, name, email });
-});
-
-app.get('/', (req, res) => {
-  res.render('index');
+  req.user.getImages()
+  .then(allImages => {
+    console.log(allImages)
+    res.render('profile', { allImages: allImages, id, name, email })
+    console.log(allImages)
+  })
 })
 
 app.get('/images/new', (req, res) => {
   res.render('new');
 })
 
-//////get route
 app.get('/mainDial', isLoggedIn, (req, res) => {
-  db.image.findAll()
+  db.image.findAll({
+    include: [db.user]
+  })
   .then(postArray =>{
-    console.log(postArray)
+    console.log(postArray[0])
     res.render('mainDial', {posts: postArray});
   })
 });
+
 ///POST ROUTE
 app.post('/mainDial', uploads.single('inputFile'), (req, res) =>{//pass in the uploads folder//allows us to bring in a single file
 //greab uploaded file
 const image = req.file.path
-console.log(image)//should show in terminal upload
+// console.log(image)//should show in terminal upload
 //upload to image to cloudinary
 cloudinary.uploader.upload(image, (result) =>{//first parameter is the file// next one is what happens after file uploaded//we are getting back a result
-    console.log(result)//result comeback from cloudinary//should get an object back in terminal//I get the url inside the object
+    // console.log(result)//result comeback from cloudinary//should get an object back in terminal//I get the url inside the object
     db.image.create({
      name: req.body.name,
      imageUrl: result.url
   })
   .then(newPost =>{
-    console.log(newPost.get())
+    // console.log(newPost.get())
+    req.user.addImage(newPost)
+    console.log(req.user)
     res.redirect('mainDial')
     })
   })
 })
+
 
 //Listen on PORT
 const PORT = process.env.PORT || 3000;

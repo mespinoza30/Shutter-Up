@@ -42,7 +42,7 @@ router.post('/signup', (req, res) => {
       passport.authenticate('local', successObject)(req, res);
     } else {
       // Send back email already exists
-      req.flash('error', 'Email already exists');
+      req.flash('error', 'Email already exists. Try logging in? 📸');
       res.redirect('/auth/signup');
     }
   })
@@ -57,7 +57,7 @@ router.post('/signup', (req, res) => {
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/auth/login',
-  successFlash: 'Welcome back ...',
+  successFlash: 'Welcome back to Shutter-Up! 📸',
   failureFlash: 'Either email or password is incorrect' 
 }));
 
