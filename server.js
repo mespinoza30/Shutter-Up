@@ -19,6 +19,7 @@ app.set('view engine', 'ejs');
 
 const SECRET_SESSION = process.env.SECRET_SESSION;
 const isLoggedIn = require('./middleware/isLoggedIn');
+const router = require('./controllers/auth');
 
 //Middleware
 app.use(require('morgan')('dev'));
@@ -99,12 +100,29 @@ cloudinary.uploader.upload(image, (result) =>{//first parameter is the file// ne
   })
 })
 
-app.delete('/profile/:index', (req, res) => {
-  db.image.destroy({ where: {id:req.params.index} 
-  }).then(function() {
-    res.redirect('profile')
-  }) 
+// //delete route
+// app.delete('/profile/:index', (req, res) => {
+//   db.image.destroy({ where: {id:req.params.index} 
+//   }).then(function() {
+//     res.redirect('profile')
+//   }) 
+// })
+
+//not sure which one?
+app.delete('/profile/:index', async(req, res) => {
+  try {
+    await db.image.destroy({
+      where: {
+        id: req.params.index
+      }
+    })
+    res.redirect('/profile');
+  } catch(e) {
+    console.log(e.message)
+  }
 })
+
+
 
 //Listen on PORT
 const PORT = process.env.PORT || 3000;
