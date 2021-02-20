@@ -5,7 +5,7 @@ const session = require('express-session');
 const passport = require('./config/ppConfig');
 const flash = require('connect-flash');
 const app = express();
-const multer = require('multer'); //sed for uploading files
+const multer = require('multer'); //used for uploading files
 const db = require('./models')
 const cloudinary = require('cloudinary');
 //uploader for images, make a uploads forlder, then pass through the route as middleware
@@ -55,7 +55,7 @@ app.get('/', (req, res) => {
 
 app.use('/auth', require('./routes/auth'));
 
-app.get('/profile', (req, res) => {
+app.get('/profile', isLoggedIn, (req, res) => {
   const { id, name, email } = req.user.get(); 
   req.user.getImages()
   .then(allImages => {
