@@ -58,7 +58,7 @@ router.post('/login', passport.authenticate('local', {
   successRedirect: '/mainDial',
   failureRedirect: '/auth/login',
   successFlash: 'Welcome back to Shutter-Up! 📸',
-  failureFlash: 'Either email or password is incorrect' 
+  failureFlash: 'Either email or password is incorrect.' 
 }));
 
 

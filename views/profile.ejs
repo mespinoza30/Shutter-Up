@@ -1,11 +1,10 @@
 <div id="divider"></div>
 <br>
-<h2 class="profile">Welcome <%= name%> 📸</h2>
-<br>
-<h4 class="profile">Please upload an image</h4>
-<br>
+<h2 class="text">Welcome <%= name%> 📸</h2>
+<h4 class="text">Please upload an image</h4>
 <br>
 <br>
+<div class="text">
 <form action="/mainDial"  method="POST" enctype="multipart/form-data">
     <label for="inputFile">Image</label> 
     <input type="file" name="inputFile">
@@ -13,8 +12,8 @@
 </form>
 <br>
 <br>
-<h4 class="profile">Your camera reel</h4>
-
+<h4 class="text">Your camera reel</h4>
+<br>
 <% for(let i = 0; i < allImages.length; i++) { %> 
     <% let postItem = allImages[i].get() %> 
     <img src="<%= postItem.imageUrl %>" alt="User uploaded image" id="profileImage"> 
@@ -22,6 +21,5 @@
         <button type="submit">Delete Image</button>
     </form>    
 <% } %> 
-
-
+</div>
 

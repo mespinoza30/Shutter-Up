@@ -2,10 +2,6 @@ nav ul li {
   text-decoration: none;
   display: inline-block;
   margin-right: .3em;
-}
-
-h1 {
-  color: rgb(106, 80, 148);
   font-family: 'Chelsea Market', cursive;
   text-shadow: 3px 3px 5px gray;
 }
@@ -16,22 +12,11 @@ h1 {
 }
 
 #divider {
-    border-top: 3px solid rgb(0, 0, 0);
+    border-top: 10px solid #dad9d6;
+    box-shadow: 3px 3px 5px gray;
 }
 
-#shoot {
-  color: rgb(106, 80, 148);
-  font-family: 'Chelsea Market', cursive;
-  text-shadow: 3px 3px 5px gray;
-}
-
-#tagLine {
-  color: rgb(106, 80, 148);
-  font-family: 'Chelsea Market', cursive;
-  text-shadow: 3px 3px 5px gray;
-}
-
-.profile {
+.text {
   color: rgb(106, 80, 148);
   font-family: 'Chelsea Market', cursive;
   text-shadow: 3px 3px 5px gray;
@@ -40,17 +25,11 @@ h1 {
 #mdImage {
   max-width: 400px;
   max-height: 400px;
+  box-shadow: 3px 3px 5px gray;
 }
 
 #profileImage {
-  width: 200px;
+  width: 300px;
+  box-shadow: 3px 3px 5px gray;
 }
-/* currently in sign up */
-/* .background {
-  
-  /* background-size: cover; */
-  /* background-repeat: no-repeat; */
-  /* background-attachment: fixed;
-  background-position: center; */
-  background-color: olive;
-} */
+
