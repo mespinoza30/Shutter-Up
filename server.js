@@ -100,6 +100,19 @@ cloudinary.uploader.upload(image, (result) =>{//first parameter is the file// ne
   })
 })
 
+app.delete('/profile/:index', async(req, res) => {
+  try {
+    await db.image.destroy({
+      where: {
+        id: req.params.index
+      }
+    })
+    res.redirect('/profile');
+  } catch(e) {
+    console.log(e.message)
+  }
+})
+
 //404 page
 app.use(function(req, res, next){
   res.status(404).render('404');

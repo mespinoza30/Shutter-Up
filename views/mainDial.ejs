@@ -5,5 +5,5 @@
 <% for(let i = 0; i < posts.length; i++) { %> 
     <% let postItem = posts[i].get() %> 
     <img src="<%= postItem.imageUrl %>" alt="User uploaded image" id="imagePosted"> 
-    <h6><p class="profile">Posted by: <%= postItem.user.name %> </p></h6>
+    <h6><p class="profile">Shot by: <%= postItem.user.name %> </p></h6>
 <% } %> 
