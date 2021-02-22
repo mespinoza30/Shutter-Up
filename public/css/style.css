@@ -1,3 +1,12 @@
+@media only screen and (max-width: 600px) {
+  #mdImage {
+    width: 100%;
+  }
+  #profileImage {
+    width: 100%;
+  }
+}
+
 nav ul li {
   text-decoration: none;
   display: inline-block;
@@ -11,7 +20,8 @@ h1 {
 }
 
 .page {
-  text-align: center
+  text-align: center;
+  background-image: url(https://res.cloudinary.com/dvzw25pxu/image/upload/v1613961927/E020701-0_leoda6.jpg);
 }
 
 #divider {
@@ -36,14 +46,20 @@ h1 {
   text-shadow: 3px 3px 5px gray;
 }
 
-#imagePosted {
-  width: 180px;
+#mdImage {
+  max-width: 400px;
+  max-height: 400px;
 }
 
-/* #background {
-  background-image: url(https://res.cloudinary.com/dvzw25pxu/image/upload/v1613954609/20191009140007-GettyImages-1053962188_yeqoux.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
+#profileImage {
+  width: 200px;
+}
+/* currently in sign up */
+/* .background {
+  
+  /* background-size: cover; */
+  /* background-repeat: no-repeat; */
+  /* background-attachment: fixed;
+  background-position: center; */
+  background-color: olive;
 } */
