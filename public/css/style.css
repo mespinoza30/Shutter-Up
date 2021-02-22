@@ -9,6 +9,9 @@ nav ul li {
 .page {
   text-align: center;
   background-image: url(https://res.cloudinary.com/dvzw25pxu/image/upload/v1613961927/E020701-0_leoda6.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
 }
 
 #divider {

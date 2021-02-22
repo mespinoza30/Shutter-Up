@@ -23,7 +23,13 @@ list of technologies
 screen captures of your code
 
 ## Credits
-Give credit to any codepen that inspired you, medium article that helped you, or stackoverflow that pointed you in the right direction.
+* James Sinkler
+
+* Nick Schmitt
+
+* Brian Krabec
+
+* Diego Espinoza
 
 ## Future development
 What are the next steps for the project? How will you continue to evolve it?
